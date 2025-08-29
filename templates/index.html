@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6RYVK3F6G9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-6RYVK3F6G9');
+  </script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find Bible verses by number quickly and easily with 911 Bible. We search through all the possible chapter:verse combinations in the Bible and return a list of every chapter:verse along with the book name that matches your query.">
+  <title>911 Bible: Find Bible Verses by Number</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #96c0eb;
+      padding: 20px;
+    }
+    nav a {
+      color: #212529;
+      font-size: 24px;
+      /* font-weight: bold; */
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    footer {
+      background-color: #212529;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      margin-top: 50px;
+      }
+
+    nav div a {
+      font-size: 18px;
+    }
+
+    header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  nav li {
+    margin-left: 10px;
+  }
+
+  </style>
+</head>
+<body>
+
+  <!-- <header> -->
+    <div>
+      <nav>
+        <a href="https://don-gray.com">Don's Thoughts and Stuff - 911 Bible App</a>
+        <div>
+          <ul>
+            <li>
+              <a href="https://don-gray.com">Home</a>
+            </li>
+            <li>
+              <a href="https://www.don-gray.com/contact/">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  <!-- </header> -->
+
+
+  <!--Two Columns-->
+  <div class="container" style=“margin-top: 50px; padding: 30px;”>
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <div>
+          <h2>911 Bible App</h2>
+          <p>Enter a number that has 2 to 6 digits. 911 Bible App will find every combination of Bible verses that match all or part of your number then print them onscreen for you. For example, if you enter '911' the program will find all verses in the Bible that are '9:11' or '91:1' including the relative Book name. Results will be displayed in the King James Version but each result will include a clickable link to the Bible Hub page that shows multiple versions of the verse.</p>
+          <p>For an explanation of why I created this project and what it does, please read my blog post <i><a href="https://www.don-gray.com/2023/04/25/why-i-wrote-bible-verse-number-search/">"Why I Wrote the 911 Bible App."</i></a></p>
+          <p></p>
+          <div style="text-align: right;">
+            <button class="btn btn-primary" style="margin-top: 4px; font-size: 18px;" onclick="window.open('https://pathinternational.co/ethiopia-sponsorship/', '_blank')">Sponsor A Child</button>
+          </div>
+          
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div>
+          <img src="{{ url_for('static', filename='bible.jpg') }}" alt="Bible" class="img-fluid">
+          <p style="margin-top: 20px;"><i>If you've been blessed by this service, please consider giving to the Path Ministries Ethiopian Orphans project. PATH has been operating in Uganda for several years, providing education and safe accomodations for children. They have recently exanded into Ethiopia. I hope you'll take time to check them out and sponsor a child!</i> <br>
+            <span style="font-size: 0.8em;">[NOTE: I am not affiliated with PATH Ministries but am a supporter of their work.]</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="width: 75%; text-align: center;">
+
+
+  <!-- Form -->
+  <div class="d-flex justify-content-center" style="margin-top: 50px;">
+    <form action="/submit" method="POST" style="width: 50%;">
+      <div class="form-group">
+        <label for="myNumber" style="font-size: 22px;">Enter Number (2 to 6 digits):</label>
+        <input type="text" class="form-control" id="myNumber" name="my_number" pattern="[0-9]{2,6}" required oninvalid="this.setCustomValidity('Please enter a number between 2 and 6 digits')" oninput="this.setCustomValidity('')">
+      </div>
+      <button type="submit" class="btn btn-primary" id="submit-button" style="margin-top: 10px; font-size: 24px;">Submit</button>
+    </form>
+  </div>
+
+  <!-- Spacer -->
+  <!-- <div style="height: 50px;"></div> -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 id="results-header" class="mb-4" style="display:none; text-align: center; font-size: 36px;">Results</h1>
+        <div id="result" style="text-align: left;"></div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="width: 75%; text-align: center;">
+
+
+  <!-- Spacer
+  <div style="height: 50px;"></div> -->
+
+  <div class="d-flex justify-content-center" style="margin-top: 25px; padding: 20px; width: 100%;">
+    <div style="width: 50%;">
+      If you find bugs to report or have questions, please click on <a href="https://www.don-gray.com/contact/">Contact</a> and I will do my best to get back to you.
+    </div>
+  </div>
+  
+
+  <footer>
+    <div>
+      <div>
+        <div>
+          <div>
+            <p>&copy; 2023 Don's Thoughts and Stuff - Bible Verse Number Search</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    const form = document.querySelector('form');
+    const resultDiv = document.querySelector('#result');
+    const resultsHeader = document.getElementById('results-header');
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      fetch('/submit', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(result => {
+        let html = '';
+        for (const item of result) {
+          html += `<p style="font-size: 24px;">${item}</p>`;
+        }
+        const myNumber = document.getElementById('myNumber').value;
+        resultsHeader.innerHTML = `Results ${myNumber}`;
+        resultsHeader.style.display = 'block';
+
+        resultDiv.innerHTML = ''; // Clear previous results
+        resultDiv.innerHTML = html; // Append new results
+        document.getElementById('myNumber').value = '';
+      });
+
+    });
+
+</script>
+
+</body>
+</html>
