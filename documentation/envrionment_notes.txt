@@ -5,3 +5,17 @@ set FLASK_APP=app.py
 
 Then run:
 flask run
+* Running on http://127.0.0.1:5000
+
+-------------------------------------
+
+Useful Command Line GIT Commands:
+    Remove Directory from GIT Tracking Index: git rm -r --cached __pycache__
+    Commit: git commit -m "Remove __pycache__ directories from tracking"
+    Push: git push 
+    Pull (execute from project root Directory): git pull 
+
+git reset --hard HEAD
+```*   `reset --hard` discards all local changes and modifications.
+*   `HEAD` tells it to reset to the state of the very last commit.
+Your local repository is now clean, so the pull will work without any conflicts.
