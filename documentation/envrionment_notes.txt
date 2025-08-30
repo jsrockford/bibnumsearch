@@ -1,0 +1,7 @@
+To run dev flask web server in IDE:
+
+In Terminal set environmental variable:
+set FLASK_APP=app.py
+
+Then run:
+flask run
