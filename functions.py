@@ -40,16 +40,30 @@ def convert_to_search(user_input):
     return search_src     # returns list of formatted scriptures to use in Bible search
 
 
-def test_match(test_numbers):   # replaced test_numbers with user_numbers_list
+def test_match(test_numbers, bible_lookup):
+    """
+    Searches for verses by doing a fast dictionary lookup.
+    'test_numbers' is a list like ['1:1', '11:1'].
+    'bible_lookup' is the dictionary loaded from the JSON file.
+    """
     matches = []
-    for num_list in test_numbers:
-        results = []  # Clear the results list for each iteration
-        for line in kjv_text:
-            if num_list == line[1]:
-                results.append(line)
+    # Loop through the potential search keys (e.g., '1:1', '11:1', etc.)
+    for num_key in test_numbers:
+        
+        # Use .get() to look up the key in the dictionary.
+        # This will return a LIST of verses (e.g., [["Genesis", "..."], ["Exodus", "..."]])
+        # or it will return None if the key is not found.
+        list_of_verses = bible_lookup.get(num_key)
 
-        for verse in results:
-            verse_str = f'<a href="https://biblehub.com/{verse[0].lower().replace(" ", "_")}/{verse[1].replace(":", "-")}.htm" target="_blank">{verse[0]} {verse[1]}</a> - {verse[2]}'
-            matches.append(verse_str)
+        # If the key was found, list_of_verses will not be None.
+        if list_of_verses:
+            # Now, loop through every verse that was found for that key.
+            for verse_data in list_of_verses:
+                book = verse_data[0]
+                text = verse_data[1]
+
+                # Build the HTML link for this specific verse and add it to our final list.
+                verse_str = f'<a href="https://biblehub.com/{book.lower().replace(" ", "_")}/{num_key.replace(":", "-")}.htm" target="_blank">{book} {num_key}</a> - {text}'
+                matches.append(verse_str)
 
     return matches
