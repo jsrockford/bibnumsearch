@@ -9,3 +9,5 @@ __pycache__/
 # Other common files to ignore
 .env
 *.log
+
+# ignore Repomix output files
