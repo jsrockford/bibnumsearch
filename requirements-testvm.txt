@@ -4,5 +4,5 @@
 -r requirements-base.txt
 
 # Production-specific versions for Ubuntu (Python 3.8)
-weasyprint==59.0
-pydyf==0.6.0
+weasyprint==61.2
+pydyf==0.10.0
