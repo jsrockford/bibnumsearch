@@ -138,6 +138,7 @@
       </div>
       <button type="submit" class="btn btn-primary" id="submit-button" style="margin-top: 10px; font-size: 24px;">Submit</button>
       <button type="button" class="btn btn-danger" id="clear-button" style="margin-top: 10px; font-size: 24px; margin-left: 15px;">Clear</button>
+      <a href="#" class="btn btn-success" id="download-button" role="button" style="margin-top: 10px; font-size: 24px; margin-left: 15px; display: none;">Download PDF</a>
     </form>
   </div>
 
@@ -185,42 +186,47 @@
     const form = document.querySelector('form');
     const resultDiv = document.querySelector('#result');
     const resultsHeader = document.getElementById('results-header');
-
-    form.addEventListener('submit', event => {
-      event.preventDefault();
-      const formData = new FormData(form);
-      fetch('/submit', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(result => {
-        let html = '';
-        for (const item of result) {
-          html += `<p style="font-size: 24px;">${item}</p>`;
-        }
-        const myNumber = document.getElementById('myNumber').value;
-        resultsHeader.innerHTML = `Results ${myNumber}`;
-        resultsHeader.style.display = 'block';
-
-        resultDiv.innerHTML = ''; // Clear previous results
-        resultDiv.innerHTML = html; // Append new results
-        document.getElementById('myNumber').value = '';
-      });
-
-    });
-
+    const numberInput = document.getElementById('myNumber');
     const clearButton = document.getElementById('clear-button');
+    const downloadButton = document.getElementById('download-button'); // Get the new download button
 
-    clearButton.addEventListener('click', () => {
-      // 1. Clear the results from the page
-      resultDiv.innerHTML = '';
-      // 2. Hide the 'Results for...' header
-      resultsHeader.style.display = 'none';
-      // 3. Clear the text in the input box
-      numberInput.value = '';
+    // --- Submit button logic ---
+    form.addEventListener('submit', event => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        fetch('/submit', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(result => {
+            let html = '';
+            for (const item of result) {
+                html += `<p style="font-size: 24px;">${item}</p>`;
+            }
+
+            // Update and show the results header
+            resultsHeader.innerHTML = `Results for ${numberInput.value}`;
+            resultsHeader.style.display = 'block';
+
+            // Update the download button's link and make it visible
+            downloadButton.href = `/download?number=${numberInput.value}`;
+            downloadButton.style.display = 'inline-block'; // Show the button
+
+            // Display the results
+            resultDiv.innerHTML = html;
+            numberInput.value = '';
+        });
     });
 
+    // --- Clear button logic ---
+    clearButton.addEventListener('click', () => {
+        resultDiv.innerHTML = '';
+        resultsHeader.style.display = 'none';
+        numberInput.value = '';
+        downloadButton.style.display = 'none'; // Hide the download button
+        downloadButton.href = '#'; // Reset its link
+    });
 </script>
 
 </body>
