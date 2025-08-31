@@ -1,0 +1,8 @@
+# requirements-testvm.txt
+
+# Include the base requirements
+-r requirements-base.txt
+
+# Production-specific versions for Ubuntu (Python 3.8)
+weasyprint==59.0
+pydyf==0.5.0

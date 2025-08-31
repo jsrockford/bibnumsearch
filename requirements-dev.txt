@@ -1,0 +1,7 @@
+# requirements-dev.txt
+
+# Include the base requirements
+-r requirements-base.txt
+
+# Development-specific versions for Windows (Newer Python)
+weasyprint
