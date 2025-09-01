@@ -11,3 +11,7 @@ __pycache__/
 *.log
 
 # ignore Repomix output files
+repomix-output.txt
+
+# ignore SpecStory files
+.specstory/
