@@ -15,3 +15,5 @@ repomix-output.txt
 
 # ignore SpecStory files
 .specstory/
+# ignore tmp files
+tmp/
