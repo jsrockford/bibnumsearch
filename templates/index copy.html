@@ -22,7 +22,7 @@
       align-items: center;
       justify-content: space-between;
       background-color: #96c0eb;
-      padding: 10px 20px;
+      padding: 20px;
     }
     nav a {
       color: #212529;
@@ -76,19 +76,6 @@
   nav li {
     margin-left: 10px;
   }
-  
-  /* Style for the new logo */
-  .navbar-brand-container {
-    display: flex;
-    align-items: center; /* This will vertically align the logo and text */
-    text-decoration: none;
-  }
-
-  .navbar-logo {
-    height: 100px; /* You can adjust this height */
-    width: auto;
-    margin-right: 15px; /* Adds some space between the logo and the text */
-  }
 
   </style>
 </head>
@@ -97,10 +84,7 @@
   <!-- <header> -->
     <div>
       <nav>
-        <a href="https://don-gray.com" class="navbar-brand-container">
-          <img src="{{ url_for('static', filename='logo.png') }}" alt="911 Bible App Logo" class="navbar-logo">
-          <span>Don's Thoughts and Stuff - 911 Bible App</span>
-        </a>
+        <a href="https://don-gray.com">Don's Thoughts and Stuff - 911 Bible App</a>
         <div>
           <ul>
             <li>
