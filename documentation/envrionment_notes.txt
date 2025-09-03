@@ -19,3 +19,6 @@ git reset --hard HEAD
 ```*   `reset --hard` discards all local changes and modifications.
 *   `HEAD` tells it to reset to the state of the very last commit.
 Your local repository is now clean, so the pull will work without any conflicts.
+
+To remove a previously tracked file from git:
+git rm --cached repomix-output.txt
