@@ -8,9 +8,16 @@
         h1 { font-size: 20pt; }
         p { font-size: 12pt; margin-bottom: 1em; }
         a { color: black; text-decoration: none; } /* Links might not be clickable, so make them look like text */
+        .header { text-align: center; margin-bottom: 2em; }
+        .logo { max-width: 200px; margin-bottom: 1em; }
+        .brand-title { font-size: 24pt; margin-bottom: 0.5em; }
     </style>
 </head>
 <body>
+    <div class="header">
+        <img src="/static/logo.png" alt="911 Bible App Logo" class="logo">
+        <div class="brand-title">911 Bible App Results - 911bible.app</div>
+    </div>
     <h1>Bible Number Search Results for "{{ search_term }}"</h1>
     <hr>
     

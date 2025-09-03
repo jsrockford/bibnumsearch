@@ -17,3 +17,10 @@ repomix-output.txt
 .specstory/
 # ignore tmp files
 tmp/
+
+# ignore cursor files
+.cursorindexingignore
+
+# ignore vs code files
+.vs/ 
+
