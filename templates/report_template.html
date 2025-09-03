@@ -5,20 +5,29 @@
     <style>
         /* Styles optimized for a printed document */
         body { font-family: sans-serif; margin: 2em; }
-        h1 { font-size: 20pt; }
+        h1 { font-size: 20pt; text-align: center; }
         p { font-size: 12pt; margin-bottom: 1em; }
         a { color: black; text-decoration: none; } /* Links might not be clickable, so make them look like text */
         .header { text-align: center; margin-bottom: 2em; }
-        .logo { max-width: 200px; margin-bottom: 1em; }
-        .brand-title { font-size: 24pt; margin-bottom: 0.5em; }
+        .logo { max-width: 200px; margin-bottom: 0.5em; }
+        .brand-title { font-size: 24pt; margin-bottom: 1em; }
+        @page {
+            margin: 2em;
+            @bottom-right {
+                content: "911bible.app";
+                font-family: sans-serif;
+                font-size: 10pt;
+                color: #666;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <img src="/static/logo.png" alt="911 Bible App Logo" class="logo">
-        <div class="brand-title">911 Bible App Results - 911bible.app</div>
+        <img src="{{ url_for('static', filename='logo.png', _external=True) }}" alt="911 Bible App Logo" class="logo">
+        <div class="brand-title">911 Bible App Results</div>
     </div>
-    <h1>Bible Number Search Results for "{{ search_term }}"</h1>
+    <h1>{{ search_term }}</h1>
     <hr>
     
     {% if results %}

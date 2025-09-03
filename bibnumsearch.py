@@ -36,7 +36,8 @@ def download_pdf():
     html_for_pdf = render_template('report_template.html', results=results, search_term=search_number)
 
     # 4. Use WeasyPrint to convert the HTML string into a PDF in memory
-    pdf_bytes = HTML(string=html_for_pdf).write_pdf()
+    # Create WeasyPrint HTML object with base URL to resolve static files
+    pdf_bytes = HTML(string=html_for_pdf, base_url=request.url_root).write_pdf()
 
     # 5. Create a Flask Response to send the PDF back to the user
     return Response(
